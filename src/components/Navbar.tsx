@@ -95,39 +95,55 @@ export default function Navbar() {
         {/* Luxury Gold Strip */}
         <div className="h-1.5 w-full bg-gradient-to-r from-[#b38728] via-[#f3d07a] to-[#996515]"></div>
 
-        {/* Top Header */}
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 py-3.5 md:py-5">
-          <div className="grid grid-cols-3 items-center">
-            {/* Left Sub-brand */}
-            <div className="flex items-center gap-3">
-              <span className="hidden text-[10px] font-semibold tracking-[0.25em] text-neutral-400 uppercase sm:inline-block">
-                OFFICIAL LUXURY
-              </span>
+        {/* Main Header Row */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3.5 md:py-4">
+          <div className="flex items-center justify-between gap-4 lg:gap-8">
+            {/* Brand Title (Left Corner) */}
+            <div className="flex items-center gap-3 shrink-0">
+              <Link
+                href="/"
+                className="group inline-flex items-center transition-opacity hover:opacity-85"
+              >
+                <span className="text-2xl sm:text-3xl font-extrabold tracking-[0.25em] font-sans uppercase pl-[0.1em] bg-gradient-to-r from-[#8a5b14] via-[#c29015] to-[#71440a] bg-clip-text text-transparent">
+                  GANHOM
+                </span>
+              </Link>
               {currentUser?.isAdmin && (
                 <Link
                   href="/admin/products"
-                  className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500 text-white text-[11px] font-bold shadow-sm hover:bg-amber-600 transition"
+                  className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#c29015] text-white text-[11px] font-bold shadow-sm hover:bg-[#8a5b14] transition"
                 >
                   <LayoutDashboard className="w-3 h-3" />
-                  หลังบ้าน (Seller Centre)
+                  หลังบ้าน
                 </Link>
               )}
             </div>
 
-            {/* Brand Title */}
-            <div className="flex justify-center">
-              <Link
-                href="/"
-                className="group inline-flex flex-col items-center justify-center transition-opacity hover:opacity-85"
-              >
-                <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-[0.3em] font-sans uppercase pl-[0.35em] bg-gradient-to-r from-[#8a5b14] via-[#c29015] to-[#71440a] bg-clip-text text-transparent">
-                  GANHOM
-                </span>
-              </Link>
-            </div>
+            {/* Navigation Menu (Top Bar) */}
+            <nav className="hidden md:flex items-center justify-center gap-4 lg:gap-6 xl:gap-7 flex-1">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`group relative whitespace-nowrap py-1 text-xs lg:text-[13px] tracking-wide transition-colors duration-200 ${
+                      isActive ? "text-black font-semibold" : "text-neutral-600 hover:text-black font-medium"
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <span
+                      className={`absolute bottom-0 left-0 h-[2px] w-full bg-black transition-transform duration-200 origin-center ${
+                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                      }`}
+                    ></span>
+                  </Link>
+                );
+              })}
+            </nav>
 
             {/* Right Action Icons */}
-            <div className="flex items-center justify-end gap-3.5 sm:gap-5 md:gap-6 text-black">
+            <div className="flex items-center justify-end gap-3.5 sm:gap-4 md:gap-5 text-black shrink-0">
               {/* Search Toggle */}
               <button
                 type="button"
@@ -156,7 +172,7 @@ export default function Navbar() {
                 >
                   <User className="h-5 w-5 md:h-[22px] md:w-[22px] stroke-[1.6]" />
                   {currentUser && (
-                    <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+                    <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-[#c29015] border-2 border-white"></span>
                   )}
                 </button>
 
@@ -216,7 +232,7 @@ export default function Navbar() {
                         setIsLangOpen(false);
                       }}
                       className={`w-full text-left px-3 py-1.5 text-xs rounded-lg font-medium transition cursor-pointer ${
-                        currentLang === "TH" ? "bg-amber-50 text-amber-900 font-bold" : "hover:bg-neutral-50"
+                        currentLang === "TH" ? "bg-[#fdf8e6] text-[#8a5b14] font-bold" : "hover:bg-neutral-50"
                       }`}
                     >
                       🇹🇭 ภาษาไทย (TH)
@@ -227,7 +243,7 @@ export default function Navbar() {
                         setIsLangOpen(false);
                       }}
                       className={`w-full text-left px-3 py-1.5 text-xs rounded-lg font-medium transition cursor-pointer ${
-                        currentLang === "EN" ? "bg-amber-50 text-amber-900 font-bold" : "hover:bg-neutral-50"
+                        currentLang === "EN" ? "bg-[#fdf8e6] text-[#8a5b14] font-bold" : "hover:bg-neutral-50"
                       }`}
                     >
                       🇬🇧 English (EN)
@@ -275,30 +291,28 @@ export default function Navbar() {
           </div>
         )}
 
-        {/* Navigation Menu */}
-        <nav className="border-t border-neutral-100 bg-white">
-          <div className="mx-auto max-w-7xl px-4">
-            <div className="no-scrollbar flex items-center justify-start md:justify-center gap-4 sm:gap-6 md:gap-7 overflow-x-auto py-3">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`group relative whitespace-nowrap py-1 text-xs md:text-[13px] tracking-wide transition-colors duration-200 ${
-                      isActive ? "text-black font-semibold" : "text-neutral-600 hover:text-black font-medium"
+        {/* Mobile Navigation Menu */}
+        <nav className="md:hidden border-t border-neutral-100 bg-white">
+          <div className="no-scrollbar flex items-center justify-start gap-4 overflow-x-auto px-4 py-2.5">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`group relative whitespace-nowrap py-1 text-xs tracking-wide transition-colors duration-200 ${
+                    isActive ? "text-black font-semibold" : "text-neutral-600 hover:text-black font-medium"
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2px] w-full bg-black transition-transform duration-200 origin-center ${
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                     }`}
-                  >
-                    <span>{link.label}</span>
-                    <span
-                      className={`absolute bottom-0 left-0 h-[2px] w-full bg-black transition-transform duration-200 origin-center ${
-                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                      }`}
-                    ></span>
-                  </Link>
-                );
-              })}
-            </div>
+                  ></span>
+                </Link>
+              );
+            })}
           </div>
         </nav>
       </header>
