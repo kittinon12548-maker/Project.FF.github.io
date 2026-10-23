@@ -8,93 +8,96 @@ export default function AboutPage() {
       <div className="mb-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-[#8a5b14] transition"
         >
           <ArrowLeft className="w-4 h-4" /> กลับสู่หน้าแรก
         </Link>
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200/80 p-8 sm:p-12 shadow-sm relative overflow-hidden">
-        {/* Ambient Top Glow */}
-        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 via-indigo-500 to-sky-400"></div>
+      <div className="bg-white rounded-3xl border border-neutral-200/80 p-8 sm:p-12 shadow-sm relative overflow-hidden">
+        {/* Ambient Top Gold Glow */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-[#b38728] via-[#f3d07a] to-[#996515] absolute top-0 left-0 right-0"></div>
 
         <div className="flex items-center gap-2 mb-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600 border border-blue-100">
-            <Sparkles className="w-3.5 h-3.5" /> About Me / Profile
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-[#8a5b14] border border-amber-200/80">
+            <Sparkles className="w-3.5 h-3.5 text-[#c29015]" /> About Me / Profile
           </span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-950 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
           เกี่ยวกับฉัน
         </h1>
 
-        <p className="mt-2 text-sm text-slate-500">
+        <p className="mt-2 text-sm text-neutral-500">
           ข้อมูลส่วนตัวและเป้าหมายของผู้พัฒนาเว็บไซต์
         </p>
 
-        {/* Highlighted Profile Info */}
+        {/* Highlighted Profile Info in Unified 3 Colors */}
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-100/80 flex flex-col justify-between">
+          {/* Card 1 */}
+          <div className="p-5 rounded-2xl bg-neutral-50/70 border border-neutral-200/80 hover:border-[#c29015] transition-all flex flex-col justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900 text-[#f3d07a] shadow-xs">
                 <GraduationCap className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold text-blue-800 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#8a5b14] uppercase tracking-wider">
                 การศึกษา
               </span>
             </div>
             <div className="mt-4">
-              <p className="text-xs text-slate-500">สาขา</p>
-              <p className="text-base font-bold text-slate-900 mt-0.5">
+              <p className="text-xs text-neutral-400">สาขา</p>
+              <p className="text-base font-bold text-neutral-900 mt-0.5">
                 🎓 วิทยาการคอมพิวเตอร์
               </p>
-              <p className="text-xs text-blue-700 mt-1">มหาวิทยาลัยทักษิณ (TSU)</p>
+              <p className="text-xs text-neutral-500 mt-1">มหาวิทยาลัยทักษิณ (TSU)</p>
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-amber-50/60 border border-amber-100/80 flex flex-col justify-between">
+          {/* Card 2 */}
+          <div className="p-5 rounded-2xl bg-neutral-50/70 border border-neutral-200/80 hover:border-[#c29015] transition-all flex flex-col justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-600 text-white shadow-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900 text-[#f3d07a] shadow-xs">
                 <BookOpen className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#8a5b14] uppercase tracking-wider">
                 ความสนใจ
               </span>
             </div>
             <div className="mt-4">
-              <p className="text-xs text-slate-500">รายวิชาที่ชอบ</p>
-              <p className="text-base font-bold text-slate-900 mt-0.5">
+              <p className="text-xs text-neutral-400">รายวิชาที่ชอบ</p>
+              <p className="text-base font-bold text-neutral-900 mt-0.5">
                 📚 ภาษาอังกฤษเพื่อการสื่อสาร 1
               </p>
-              <p className="text-xs text-amber-700 mt-1">English for Communication 1</p>
+              <p className="text-xs text-neutral-500 mt-1">English for Communication 1</p>
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-100/80 flex flex-col justify-between">
+          {/* Card 3 */}
+          <div className="p-5 rounded-2xl bg-neutral-50/70 border border-neutral-200/80 hover:border-[#c29015] transition-all flex flex-col justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-900 text-[#f3d07a] shadow-xs">
                 <Target className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#8a5b14] uppercase tracking-wider">
                 เป้าหมายในอนาคต
               </span>
             </div>
             <div className="mt-4">
-              <p className="text-xs text-slate-500">เป้าหมาย</p>
-              <p className="text-base font-bold text-slate-900 mt-0.5">
+              <p className="text-xs text-neutral-400">เป้าหมาย</p>
+              <p className="text-base font-bold text-neutral-900 mt-0.5">
                 🎯 ว่างงานแต่รวย
               </p>
-              <p className="text-xs text-emerald-700 mt-1">Financial Freedom &amp; Happiness</p>
+              <p className="text-xs text-neutral-500 mt-1">Financial Freedom &amp; Happiness</p>
             </div>
           </div>
         </div>
 
         {/* Detailed Section */}
-        <div className="mt-8 border-t border-slate-100 pt-6">
-          <h2 className="text-lg font-bold text-slate-900 mb-3">
+        <div className="mt-8 border-t border-neutral-100 pt-6">
+          <h2 className="text-lg font-bold text-neutral-900 mb-3">
             เกี่ยวกับโปรเจกต์นี้
           </h2>
-          <p className="text-sm text-slate-600 leading-relaxed">
+          <p className="text-sm text-neutral-600 leading-relaxed">
             เว็บไซต์นี้เป็นส่วนหนึ่งของรายวิชา <strong>0214321 Web App Design &amp; Development</strong>{" "}
             พัฒนาด้วย Next.js, React, TypeScript และ Tailwind CSS เพื่อจำลองแพลตฟอร์ม E-Commerce
             ระดับลักชัวรีแบรนด์ <strong>GANHOM</strong> ที่ผสานระบบจัดการผลิตภัณฑ์ บทความ (Blog API)

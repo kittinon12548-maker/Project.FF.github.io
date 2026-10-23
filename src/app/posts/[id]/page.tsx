@@ -97,11 +97,11 @@ export default function PostDetailPage() {
   if (isLoading) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12 space-y-6">
-        <div className="h-6 w-32 bg-slate-200 rounded animate-pulse"></div>
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 space-y-4">
-          <div className="h-4 w-24 bg-slate-200 rounded animate-pulse"></div>
-          <div className="h-8 w-3/4 bg-slate-300 rounded animate-pulse"></div>
-          <div className="h-24 bg-slate-100 rounded-xl animate-pulse"></div>
+        <div className="h-6 w-32 bg-neutral-200 rounded animate-pulse"></div>
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-neutral-200 space-y-4">
+          <div className="h-4 w-24 bg-neutral-200 rounded animate-pulse"></div>
+          <div className="h-8 w-3/4 bg-neutral-300 rounded animate-pulse"></div>
+          <div className="h-24 bg-neutral-100 rounded-xl animate-pulse"></div>
         </div>
       </div>
     );
@@ -110,10 +110,10 @@ export default function PostDetailPage() {
   if (!post) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-xl font-bold text-slate-800">ไม่พบบทความที่ต้องการ</h2>
+        <h2 className="text-xl font-bold text-neutral-800">ไม่พบบทความที่ต้องการ</h2>
         <Link
           href="/posts"
-          className="mt-4 inline-flex items-center gap-2 text-sm text-blue-600 font-bold hover:underline"
+          className="mt-4 inline-flex items-center gap-2 text-sm text-[#8a5b14] font-bold hover:underline"
         >
           <ArrowLeft className="w-4 h-4" /> กลับสู่หน้ารวมบทความ
         </Link>
@@ -125,28 +125,28 @@ export default function PostDetailPage() {
     <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12 space-y-6">
       <Link
         href="/posts"
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-500 hover:text-[#8a5b14] transition-colors"
       >
         <ArrowLeft className="w-4 h-4" /> กลับไปยังบทความทั้งหมด
       </Link>
 
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-neutral-200/80 shadow-xs space-y-6">
         <div>
-          <span className="inline-block bg-blue-50 text-blue-700 font-bold text-xs px-3 py-1 rounded-full mb-3 border border-blue-100">
+          <span className="inline-block bg-amber-50 text-[#8a5b14] font-bold text-xs px-3 py-1 rounded-full mb-3 border border-amber-200/80">
             บทความ #{post.id}
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 leading-tight">
             {post.title}
           </h1>
         </div>
 
-        <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-slate-700 leading-relaxed text-sm sm:text-base whitespace-pre-line">
+        <div className="p-4 bg-neutral-50 rounded-xl border border-neutral-100 text-neutral-700 leading-relaxed text-sm sm:text-base whitespace-pre-line">
           {post.body}
         </div>
 
         {/* Like Button */}
-        <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-          <span className="text-xs text-slate-400 font-medium">
+        <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
+          <span className="text-xs text-neutral-400 font-medium">
             ชอบบทความนี้ไหม?
           </span>
           <button
@@ -154,24 +154,24 @@ export default function PostDetailPage() {
             onClick={handleLike}
             className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
               isLiked
-                ? "bg-rose-50 text-rose-600 border border-rose-200 shadow-sm"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                ? "bg-amber-50 text-[#8a5b14] border border-amber-200 shadow-xs"
+                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
             }`}
           >
             <Heart
-              className={`w-4 h-4 ${isLiked ? "fill-rose-500 text-rose-500" : ""}`}
+              className={`w-4 h-4 ${isLiked ? "fill-[#c29015] text-[#c29015]" : ""}`}
             />
             <span>{likes} Likes</span>
           </button>
         </div>
 
         {/* Comments Section */}
-        <div className="space-y-6 pt-6 border-t border-slate-200/80">
+        <div className="space-y-6 pt-6 border-t border-neutral-200/80">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-              <MessageSquare className="w-5 h-5 text-blue-600" />
+            <h3 className="text-xl font-extrabold text-neutral-900 flex items-center gap-2">
+              <MessageSquare className="w-5 h-5 text-[#8a5b14]" />
               <span>ความคิดเห็น</span>
-              <span className="text-xs bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full font-bold">
+              <span className="text-xs bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full font-bold">
                 {comments.length}
               </span>
             </h3>
@@ -180,13 +180,13 @@ export default function PostDetailPage() {
           {/* Comment Form */}
           <form
             onSubmit={handleSubmitComment}
-            className="bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 space-y-4"
+            className="bg-neutral-50/80 rounded-2xl p-5 border border-neutral-200/80 space-y-4"
           >
-            <h4 className="text-sm font-bold text-slate-800">
+            <h4 className="text-sm font-bold text-neutral-800">
               แสดงความคิดเห็นของคุณ
             </h4>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-neutral-700 mb-1">
                 ชื่อผู้แสดงความคิดเห็น
               </label>
               <input
@@ -195,11 +195,11 @@ export default function PostDetailPage() {
                 value={commentName}
                 onChange={(e) => setCommentName(e.target.value)}
                 required
-                className="w-full p-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2.5 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-[#c29015]"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-neutral-700 mb-1">
                 ข้อความความคิดเห็น
               </label>
               <textarea
@@ -208,14 +208,14 @@ export default function PostDetailPage() {
                 value={commentBody}
                 onChange={(e) => setCommentBody(e.target.value)}
                 required
-                className="w-full p-3 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 text-sm bg-white border border-neutral-200 rounded-xl focus:outline-none focus:border-[#c29015]"
               ></textarea>
             </div>
             <div className="flex justify-end">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition shadow-md shadow-blue-500/20 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 bg-gradient-to-r from-[#8a5b14] via-[#c29015] to-[#71440a] hover:brightness-105 text-white font-bold text-xs rounded-xl transition shadow-md disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>{isSubmitting ? "กำลังส่ง..." : "ส่งความคิดเห็น"}</span>
@@ -228,22 +228,22 @@ export default function PostDetailPage() {
             {comments.map((comm) => (
               <div
                 key={comm.id}
-                className="p-4 bg-white rounded-xl border border-slate-200/80 space-y-1.5 shadow-sm"
+                className="p-4 bg-white rounded-xl border border-neutral-200/80 space-y-1.5 shadow-xs"
               >
                 <div className="flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 text-xs">
+                  <div className="h-6 w-6 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 text-xs">
                     <User className="w-3.5 h-3.5" />
                   </div>
-                  <span className="text-xs font-bold text-slate-800">
+                  <span className="text-xs font-bold text-neutral-800">
                     {comm.name}
                   </span>
                   {comm.email && (
-                    <span className="text-[11px] text-slate-400">
+                    <span className="text-[11px] text-neutral-400">
                       ({comm.email})
                     </span>
                   )}
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-8">
+                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed pl-8">
                   {comm.body}
                 </p>
               </div>

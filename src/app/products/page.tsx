@@ -173,7 +173,7 @@ export default function ProductsPage() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   {product.compareAtPrice > product.price && (
-                    <span className="absolute top-3 left-3 bg-[#e11d48] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
+                    <span className="absolute top-3 left-3 bg-neutral-950 text-[#f3d07a] border border-[#b38728]/40 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
                       ลด {Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)}%
                     </span>
                   )}
@@ -193,7 +193,7 @@ export default function ProductsPage() {
                     <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                       {product.category}
                     </span>
-                    <h3 className="mt-1 font-bold text-sm text-neutral-900 line-clamp-1 group-hover:text-amber-800 transition-colors">
+                    <h3 className="mt-1 font-bold text-sm text-neutral-900 line-clamp-1 group-hover:text-[#996515] transition-colors">
                       {product.title}
                     </h3>
                     <p className="mt-1 text-xs text-neutral-500 line-clamp-2 leading-relaxed">

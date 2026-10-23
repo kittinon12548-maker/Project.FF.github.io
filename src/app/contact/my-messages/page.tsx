@@ -61,26 +61,26 @@ export default function MyMessagesPage() {
       <div>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition mb-3"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-[#8a5b14] transition mb-3"
         >
           <ArrowLeft className="w-4 h-4" /> กลับสู่หน้าแบบฟอร์มติดต่อ
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600 mb-2 border border-blue-100">
+            <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-[#8a5b14] mb-2 border border-amber-200/80">
               <MessageSquare className="w-3.5 h-3.5" />
               <span>My Sent Messages</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">
               ข้อความที่ฉันส่งไว้ ({messages.length})
             </h1>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-sm text-neutral-500 mt-1">
               ดูรายการข้อความที่คุณเคยส่งถึงเรา พร้อมแก้ไขหรือลบข้อความได้ทันที
             </p>
           </div>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-blue-700 transition shadow-sm self-start sm:self-auto cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 hover:bg-black px-4 py-2.5 text-xs font-bold text-white transition shadow-sm self-start sm:self-auto cursor-pointer"
           >
             <Plus className="w-4 h-4" /> ส่งข้อความใหม่
           </Link>
@@ -88,50 +88,50 @@ export default function MyMessagesPage() {
       </div>
 
       {/* Search Bar */}
-      <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
-        <Search className="text-slate-400 text-lg pl-1 w-5 h-5" />
+      <div className="bg-white rounded-2xl p-4 border border-neutral-200/80 shadow-xs flex items-center gap-3">
+        <Search className="text-neutral-400 text-lg pl-1 w-5 h-5" />
         <input
           type="text"
           placeholder="ค้นหาข้อความ, ชื่อ หรืออีเมลของคุณ..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full text-sm font-medium text-slate-800 placeholder-slate-400 outline-none bg-transparent"
+          className="w-full text-sm font-medium text-neutral-800 placeholder-neutral-400 outline-none bg-transparent"
         />
       </div>
 
       {/* Messages List */}
       {isLoading ? (
         <div className="space-y-4">
-          <div className="h-32 bg-slate-100 animate-pulse rounded-2xl"></div>
-          <div className="h-32 bg-slate-100 animate-pulse rounded-2xl"></div>
+          <div className="h-32 bg-neutral-100 animate-pulse rounded-2xl"></div>
+          <div className="h-32 bg-neutral-100 animate-pulse rounded-2xl"></div>
         </div>
       ) : filteredMessages.length === 0 ? (
-        <div className="bg-white rounded-2xl p-12 text-center border border-slate-200">
-          <p className="text-slate-500 text-sm">ไม่พบข้อความที่ส่งไว้</p>
+        <div className="bg-white rounded-2xl p-12 text-center border border-neutral-200">
+          <p className="text-neutral-500 text-sm">ไม่พบข้อความที่ส่งไว้</p>
         </div>
       ) : (
         <div className="space-y-4">
           {filteredMessages.map((msg) => (
             <div
               key={msg.id}
-              className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all space-y-3"
+              className="bg-white rounded-2xl p-6 border border-neutral-200/80 shadow-xs hover:border-[#c29015]/60 transition-all space-y-3"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-100 pb-3">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-900 border border-amber-200/80">
                     🏷️ {msg.tag}
                   </span>
-                  <span className="font-bold text-sm text-slate-900">
+                  <span className="font-bold text-sm text-neutral-900">
                     {msg.name}
                   </span>
-                  <span className="text-xs text-slate-400 inline-flex items-center gap-1">
+                  <span className="text-xs text-neutral-400 inline-flex items-center gap-1">
                     <Mail className="w-3.5 h-3.5" />
                     {msg.email}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-3 self-end sm:self-auto">
-                  <span className="text-[11px] text-slate-400 inline-flex items-center gap-1">
+                  <span className="text-[11px] text-neutral-400 inline-flex items-center gap-1">
                     <Clock className="w-3 h-3" />
                     {new Date(msg.createdAt).toLocaleDateString("th-TH", {
                       year: "numeric",
@@ -144,7 +144,7 @@ export default function MyMessagesPage() {
                   <button
                     type="button"
                     onClick={() => handleDelete(msg.id)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 transition rounded-lg hover:bg-rose-50 cursor-pointer"
+                    className="p-1.5 text-neutral-400 hover:text-rose-600 transition rounded-lg hover:bg-rose-50 cursor-pointer"
                     title="ลบข้อความ"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -152,7 +152,7 @@ export default function MyMessagesPage() {
                 </div>
               </div>
 
-              <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line">
+              <p className="text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
                 {msg.message}
               </p>
             </div>

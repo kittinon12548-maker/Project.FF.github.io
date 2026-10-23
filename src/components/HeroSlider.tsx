@@ -122,7 +122,7 @@ export default function HeroSlider() {
               {i === currentSlide && (
                 <span
                   key={currentSlide}
-                  className="block h-full bg-[#ff6900] rounded-full"
+                  className="block h-full bg-gradient-to-r from-[#b38728] via-[#f3d07a] to-[#996515] rounded-full"
                   style={{
                     animation: isPlaying ? "heroSlideProgress 5500ms linear forwards" : "none",
                     width: isPlaying ? undefined : "100%",

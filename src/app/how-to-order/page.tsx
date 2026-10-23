@@ -54,10 +54,10 @@ export default function HowToOrderPage() {
             {/* Step 1 */}
             <div className="relative rounded-2xl border border-neutral-100 bg-neutral-50/60 p-5 flex flex-col justify-between hover:border-neutral-300 transition-all">
               <div className="space-y-3">
-                <div className="h-10 w-10 rounded-xl bg-amber-100/70 text-amber-800 flex items-center justify-center text-xl">
+                <div className="h-10 w-10 rounded-xl bg-neutral-900 text-[#f3d07a] flex items-center justify-center text-xl shadow-sm">
                   🛍️
                 </div>
-                <div className="text-xs font-bold text-amber-800 tracking-wider uppercase">
+                <div className="text-xs font-bold text-[#8a5b14] tracking-wider uppercase">
                   ขั้นตอนที่ 1
                 </div>
                 <h3 className="font-bold text-neutral-900 text-base">
@@ -70,7 +70,7 @@ export default function HowToOrderPage() {
               <div className="mt-4 pt-3 border-t border-neutral-200/60">
                 <Link
                   href="/products"
-                  className="text-xs font-semibold text-neutral-900 hover:text-amber-800 inline-flex items-center gap-1"
+                  className="text-xs font-semibold text-neutral-900 hover:text-[#b38728] inline-flex items-center gap-1"
                 >
                   ดูสินค้าทั้งหมด →
                 </Link>
@@ -80,10 +80,10 @@ export default function HowToOrderPage() {
             {/* Step 2 */}
             <div className="relative rounded-2xl border border-neutral-100 bg-neutral-50/60 p-5 flex flex-col justify-between hover:border-neutral-300 transition-all">
               <div className="space-y-3">
-                <div className="h-10 w-10 rounded-xl bg-blue-100/70 text-blue-800 flex items-center justify-center text-xl">
+                <div className="h-10 w-10 rounded-xl bg-neutral-900 text-[#f3d07a] flex items-center justify-center text-xl shadow-sm">
                   🛒
                 </div>
-                <div className="text-xs font-bold text-blue-800 tracking-wider uppercase">
+                <div className="text-xs font-bold text-[#8a5b14] tracking-wider uppercase">
                   ขั้นตอนที่ 2
                 </div>
                 <h3 className="font-bold text-neutral-900 text-base">
@@ -101,10 +101,10 @@ export default function HowToOrderPage() {
             {/* Step 3 */}
             <div className="relative rounded-2xl border border-neutral-100 bg-neutral-50/60 p-5 flex flex-col justify-between hover:border-neutral-300 transition-all">
               <div className="space-y-3">
-                <div className="h-10 w-10 rounded-xl bg-emerald-100/70 text-emerald-800 flex items-center justify-center text-xl">
+                <div className="h-10 w-10 rounded-xl bg-neutral-900 text-[#f3d07a] flex items-center justify-center text-xl shadow-sm">
                   💳
                 </div>
-                <div className="text-xs font-bold text-emerald-800 tracking-wider uppercase">
+                <div className="text-xs font-bold text-[#8a5b14] tracking-wider uppercase">
                   ขั้นตอนที่ 3
                 </div>
                 <h3 className="font-bold text-neutral-900 text-base">
@@ -115,8 +115,8 @@ export default function HowToOrderPage() {
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-neutral-200/60">
-                <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5" /> ปลอดภัย 100%
+                <span className="text-xs text-[#8a5b14] font-semibold inline-flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#c29015]" /> ปลอดภัย 100%
                 </span>
               </div>
             </div>
@@ -124,10 +124,10 @@ export default function HowToOrderPage() {
             {/* Step 4 */}
             <div className="relative rounded-2xl border border-neutral-100 bg-neutral-50/60 p-5 flex flex-col justify-between hover:border-neutral-300 transition-all">
               <div className="space-y-3">
-                <div className="h-10 w-10 rounded-xl bg-purple-100/70 text-purple-800 flex items-center justify-center text-xl">
+                <div className="h-10 w-10 rounded-xl bg-neutral-900 text-[#f3d07a] flex items-center justify-center text-xl shadow-sm">
                   📦
                 </div>
-                <div className="text-xs font-bold text-purple-800 tracking-wider uppercase">
+                <div className="text-xs font-bold text-[#8a5b14] tracking-wider uppercase">
                   ขั้นตอนที่ 4
                 </div>
                 <h3 className="font-bold text-neutral-900 text-base">
@@ -140,7 +140,7 @@ export default function HowToOrderPage() {
               <div className="mt-4 pt-3 border-t border-neutral-200/60">
                 <Link
                   href="/contact"
-                  className="text-xs font-semibold text-neutral-900 hover:text-amber-800 inline-flex items-center gap-1"
+                  className="text-xs font-semibold text-neutral-900 hover:text-[#b38728] inline-flex items-center gap-1"
                 >
                   สอบถามสถานะคำสั่งซื้อ →
                 </Link>
@@ -168,7 +168,7 @@ export default function HowToOrderPage() {
             <div className="rounded-2xl border border-neutral-200/80 p-6 bg-gradient-to-br from-neutral-50 to-white relative overflow-hidden shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-green-600 text-white flex items-center justify-center font-bold text-base shadow-sm">
+                  <div className="h-12 w-12 rounded-xl bg-neutral-950 text-[#f3d07a] border border-[#b38728]/30 flex items-center justify-center font-bold text-sm shadow-sm">
                     KBANK
                   </div>
                   <div>
@@ -176,7 +176,7 @@ export default function HowToOrderPage() {
                     <p className="text-xs text-neutral-500">Kasikornbank</p>
                   </div>
                 </div>
-                <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span className="text-xs font-semibold text-[#8a5b14] bg-[#fdf8e6] px-2.5 py-1 rounded-full border border-[#f3d07a]">
                   แนะนำ
                 </span>
               </div>
@@ -201,7 +201,7 @@ export default function HowToOrderPage() {
                       title="คัดลอกเลขบัญชี"
                     >
                       {copiedBank ? (
-                        <Check className="w-4 h-4 text-emerald-600" />
+                        <Check className="w-4 h-4 text-[#8a5b14]" />
                       ) : (
                         <Copy className="w-4 h-4" />
                       )}
@@ -219,7 +219,7 @@ export default function HowToOrderPage() {
             <div className="rounded-2xl border border-neutral-200/80 p-6 bg-gradient-to-br from-neutral-50 to-white relative overflow-hidden shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                  <div className="h-12 w-12 rounded-xl bg-neutral-950 text-[#f3d07a] border border-[#b38728]/30 flex items-center justify-center font-bold text-sm shadow-sm">
                     QR
                   </div>
                   <div>
@@ -231,7 +231,7 @@ export default function HowToOrderPage() {
                     </p>
                   </div>
                 </div>
-                <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                <span className="text-xs font-semibold text-[#8a5b14] bg-[#fdf8e6] px-2.5 py-1 rounded-full border border-[#f3d07a]">
                   รวดเร็ว
                 </span>
               </div>
@@ -250,7 +250,7 @@ export default function HowToOrderPage() {
                       title="คัดลอกพร้อมเพย์ ID"
                     >
                       {copiedPromptPay ? (
-                        <Check className="w-4 h-4 text-emerald-600" />
+                        <Check className="w-4 h-4 text-[#8a5b14]" />
                       ) : (
                         <Copy className="w-4 h-4" />
                       )}
@@ -265,7 +265,7 @@ export default function HowToOrderPage() {
                 </div>
                 <div className="flex justify-between items-center py-1">
                   <span className="text-neutral-500">การยืนยันยอด:</span>
-                  <span className="text-emerald-600 font-medium">
+                  <span className="text-[#8a5b14] font-medium">
                     ตรวจรับยอดอัตโนมัติทันที
                   </span>
                 </div>

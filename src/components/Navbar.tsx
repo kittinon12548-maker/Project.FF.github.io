@@ -244,7 +244,7 @@ export default function Navbar() {
                 aria-label="สินค้า"
               >
                 <ShoppingBag className="h-5 w-5 md:h-[22px] md:w-[22px] stroke-[1.6]" />
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-600 text-[10px] font-bold text-white">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#c29015] text-[10px] font-bold text-white shadow-sm">
                   3
                 </span>
               </Link>
