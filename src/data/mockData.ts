@@ -158,25 +158,119 @@ export const INITIAL_PRODUCTS: Product[] = [
   }
 ];
 
-export const INITIAL_HERO_SLIDES = [
+export interface HeroSlide {
+  id: string | number;
+  title: string;
+  genre: string;
+  tagline: string;
+  subtitle?: string;
+  imageUrl: string;
+  titleLogoUrl?: string;
+  primaryBtnText: string;
+  primaryBtnHref: string;
+  secondaryBtnText?: string;
+  secondaryBtnHref?: string;
+  brand?: "apple" | "ganhom";
+}
+
+export const INITIAL_HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
-    title: "GANHOM LUXURY ESSENCE",
-    subtitle: "สัมผัสความหอมเหนือระดับด้วยสารสกัดธรรมชาติและนวัตกรรมชั้นสูง",
-    imageUrl: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=1600&auto=format&fit=crop&q=80",
-    primaryBtnText: "สั่งซื้อตอนนี้",
-    primaryBtnHref: "/products",
-    secondaryBtnText: "เรียนรู้เพิ่มเติม",
-    secondaryBtnHref: "/posts"
+    title: "The Family Plan 2",
+    genre: "ตลกเบาสมอง",
+    tagline: "ครอบครัวเดิม เพิ่มเติมคือแผนใหม่",
+    subtitle: "ครอบครัวเดิม เพิ่มเติมคือแผนใหม่",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/8rF8s5lmPuF1fmRHAMrzKQ/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/movie/the-family-plan-2/umc.cmc.1wj0ab94s7t1wy7sqv5dt6bfy",
+    brand: "apple"
   },
   {
     id: 2,
-    title: "MODERN LIFESTYLE COLLECTION",
-    subtitle: "รวมคอลเลกชันระดับพรีเมียม ตอบโจทย์ไลฟ์สไตล์คนรุ่นใหม่",
-    imageUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1600&auto=format&fit=crop&q=80",
-    primaryBtnText: "เลือกชมสินค้า",
-    primaryBtnHref: "/products",
-    secondaryBtnText: "เกี่ยวกับเรา",
-    secondaryBtnHref: "/about"
+    title: "Pluribus",
+    genre: "ดราม่า",
+    tagline: "เมื่อความสุขคือสภาวะเดียวของจิตใจ",
+    subtitle: "เมื่อความสุขคือสภาวะเดียวของจิตใจ",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/S9dLxU_nCvhomqGnI3-d_g/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/pluribus/umc.cmc.37axgovs2yozlyh3c2cmwzlza",
+    brand: "apple"
+  },
+  {
+    id: 3,
+    title: "Down Cemetery Road",
+    genre: "ระทึกขวัญ",
+    tagline: "คำตอบที่ค้นหาอาจมาพร้อมภัยที่ไม่คาดคิด",
+    subtitle: "คำตอบที่ค้นหาอาจมาพร้อมภัยที่ไม่คาดคิด",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/1A5UrdlUF6-zEu5cfQvZag/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/down-cemetery-road/umc.cmc.3i55uxosnfpzw7rw1q525iksh",
+    brand: "apple"
+  },
+  {
+    id: 4,
+    title: "Slow Horses",
+    genre: "ระทึกขวัญ",
+    tagline: "เหล่าสายลับสุดแสบของ MI5 กลับมาแล้วและกำลังตกเป็นเป้า",
+    subtitle: "เหล่าสายลับสุดแสบของ MI5 กลับมาแล้วและกำลังตกเป็นเป้า",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/x5JjmiSD75wN12-HmmZRcg/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/slow-horses/umc.cmc.2szz3fdt71tl1ulnbp8utgq5o",
+    brand: "apple"
+  },
+  {
+    id: 5,
+    title: "Knife Edge: Chasing Michelin Stars",
+    genre: "สารคดี",
+    tagline: "เพราะวัตถุดิบหลักคือแพสชัน",
+    subtitle: "เพราะวัตถุดิบหลักคือแพสชัน",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/NYVrbe6J5p8oSnrx8VoJUA/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/knife-edge-chasing-michelin-stars/umc.cmc.2yhce9h11ctctdi23b29k1ek3",
+    brand: "apple"
+  },
+  {
+    id: 6,
+    title: "The Last Frontier",
+    genre: "แอ็กชัน",
+    tagline: "ดินแดนนี้ไม่มีที่ให้ซ่อน",
+    subtitle: "ดินแดนนี้ไม่มีที่ให้ซ่อน",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/O8r6H31q_AdlrDbNhGhkAg/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/the-last-frontier/umc.cmc.6kmzwhcm9cj30piuuiymr4u7m",
+    brand: "apple"
+  },
+  {
+    id: 7,
+    title: "The Morning Show",
+    genre: "ดราม่า",
+    tagline: "ไม่มีข่าวไหนใหญ่กว่าความจริง",
+    subtitle: "ไม่มีข่าวไหนใหญ่กว่าความจริง",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/EvRDcABkXaaZtPZhuzqbkA/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/the-morning-show/umc.cmc.25tn3v8ku4b39tr6ccgb8nl6m",
+    brand: "apple"
+  },
+  {
+    id: 8,
+    title: "The Lost Bus",
+    genre: "ระทึกขวัญ",
+    tagline: "แรงบันดาลใจจากเรื่องจริงสุดระทึกที่มีชีวิตเป็นเดิมพัน",
+    subtitle: "แรงบันดาลใจจากเรื่องจริงสุดระทึกที่มีชีวิตเป็นเดิมพัน",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/HNwryvUxII-66e0CC_HPQg/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/movie/the-lost-bus/umc.cmc.4p7gv4trt1rt0kuiwzmitibiv",
+    brand: "apple"
+  },
+  {
+    id: 9,
+    title: "Chief of War",
+    genre: "ดราม่า",
+    tagline: "นักรบผู้น่าเกรงขามเริ่มต้นภารกิจครั้งประวัติศาสตร์เพื่อรวมผู้คนของเขาให้เป็นหนึ่งเดียว",
+    subtitle: "นักรบผู้น่าเกรงขามเริ่มต้นภารกิจครั้งประวัติศาสตร์เพื่อรวมผู้คนของเขาให้เป็นหนึ่งเดียว",
+    imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/YL1VpLwWejCAxTI1wFdgYg/1960x1044sr.jpg",
+    primaryBtnText: "สตรีมเลย",
+    primaryBtnHref: "https://tv.apple.com/th/show/chief-of-war/umc.cmc.6ag0zq020ielwv7m83v8r4dkw",
+    brand: "apple"
   }
 ];

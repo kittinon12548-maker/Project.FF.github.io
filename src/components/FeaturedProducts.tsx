@@ -157,22 +157,20 @@ export default function FeaturedProducts() {
         <button
           type="button"
           onClick={() => setActiveTab("new")}
-          className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer focus:outline-none ${
-            activeTab === "new"
+          className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer focus:outline-none ${activeTab === "new"
               ? "bg-neutral-900 text-[#f3d07a] shadow-md border border-[#c29015]/40"
               : "bg-white hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 border border-neutral-200"
-          }`}
+            }`}
         >
           สินค้าใหม่
         </button>
         <button
           type="button"
           onClick={() => setActiveTab("lifestyle")}
-          className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer focus:outline-none ${
-            activeTab === "lifestyle"
+          className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all whitespace-nowrap cursor-pointer focus:outline-none ${activeTab === "lifestyle"
               ? "bg-neutral-900 text-[#f3d07a] shadow-md border border-[#c29015]/40"
               : "bg-white hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 border border-neutral-200"
-          }`}
+            }`}
         >
           ตอบโจทย์ทุกไลฟ์สไตล์
         </button>

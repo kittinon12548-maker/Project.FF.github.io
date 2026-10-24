@@ -81,12 +81,10 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: "หน้าแรก", href: "/" },
+    { label: "ร้านค้า", href: "/" },
     { label: "เกี่ยวกับเรา", href: "/about" },
-    { label: "สินค้า", href: "/products" },
-    { label: "บทความ", href: "/posts" },
     { label: "วิธีการสั่งซื้อและการชำระเงิน", href: "/how-to-order" },
-    { label: "ติดต่อเรา", href: "/contact" },
+    { label: "บริการช่วยเหลือ", href: "/contact" },
   ];
 
   return (
