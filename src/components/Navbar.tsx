@@ -81,7 +81,8 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: "ร้านค้า", href: "/" },
+    { label: "หน้าแรก", href: "/" },
+    { label: "สินค้าทั้งหมด", href: "/products" },
     { label: "เกี่ยวกับเรา", href: "/about" },
     { label: "วิธีการสั่งซื้อและการชำระเงิน", href: "/how-to-order" },
     { label: "บริการช่วยเหลือ", href: "/contact" },
@@ -250,12 +251,12 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Cart / Products Link */}
+              {/* Cart Link */}
               <Link
-                href="/products"
+                href="/cart"
                 className="relative p-1 text-black transition-transform hover:scale-110"
-                title="สินค้าและตะกร้า"
-                aria-label="สินค้า"
+                title="ตะกร้าสินค้า"
+                aria-label="ตะกร้าสินค้า"
               >
                 <ShoppingBag className="h-5 w-5 md:h-[22px] md:w-[22px] stroke-[1.6]" />
                 <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#c29015] text-[10px] font-bold text-white shadow-sm">

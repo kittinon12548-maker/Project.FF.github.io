@@ -74,9 +74,17 @@ export default function ProductsPage() {
             </Link>
             <span className="text-neutral-300">/</span>
             <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider">
-              ผลิตภัณฑ์ทั้งหมด (Products)
+              สินค้าทั้งหมด (Products)
             </span>
           </div>
+
+          <Link
+            href="/cart"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fdf8e6] text-[#8a5b14] text-xs font-bold hover:bg-[#f6e9b8] transition border border-[#f3d07a]/60 shadow-xs"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>ดูตะกร้าสินค้า (3)</span>
+          </Link>
         </div>
       </div>
 
@@ -272,10 +280,17 @@ export default function ProductsPage() {
                       alert(`เพิ่ม "${selectedProduct.title}" ลงในตะกร้าเรียบร้อยแล้ว!`);
                       setSelectedProduct(null);
                     }}
-                    className="w-full py-3 rounded-full bg-neutral-900 hover:bg-black text-white text-xs sm:text-sm font-bold transition shadow-md"
+                    className="w-full py-3 rounded-full bg-neutral-900 hover:bg-black text-white text-xs sm:text-sm font-bold transition shadow-md cursor-pointer"
                   >
                     🛍️ เพิ่มลงในตะกร้าสินค้า
                   </button>
+                  <Link
+                    href="/cart"
+                    className="w-full py-2.5 rounded-full bg-[#fdf8e6] hover:bg-[#f6e9b8] text-[#8a5b14] text-xs font-bold transition border border-[#f3d07a]/60 flex items-center justify-center gap-1.5"
+                  >
+                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <span>ไปที่ตะกร้าสินค้า (View Cart)</span>
+                  </Link>
                   <Link
                     href="/how-to-order"
                     className="block text-center text-xs text-neutral-500 hover:text-black pt-1"
