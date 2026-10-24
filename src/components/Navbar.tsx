@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Search, User, Globe, ShoppingBag, X, ShieldAlert, LogOut, LayoutDashboard } from "lucide-react";
+import { getCartTotalCount } from "@/data/cartStore";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -21,6 +22,7 @@ export default function Navbar() {
   const [authError, setAuthError] = useState("");
   const [currentUser, setCurrentUser] = useState<{ email: string; isAdmin: boolean } | null>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     // Check local storage for existing session
@@ -32,6 +34,13 @@ export default function Navbar() {
         isAdmin: storedAdmin === "true",
       });
     }
+
+    const updateCount = () => {
+      setCartCount(getCartTotalCount());
+    };
+    updateCount();
+    window.addEventListener("cartUpdated", updateCount);
+    return () => window.removeEventListener("cartUpdated", updateCount);
   }, []);
 
   // Hide Navbar when in /admin dashboard
@@ -260,7 +269,7 @@ export default function Navbar() {
               >
                 <ShoppingBag className="h-5 w-5 md:h-[22px] md:w-[22px] stroke-[1.6]" />
                 <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#c29015] text-[10px] font-bold text-white shadow-sm">
-                  3
+                  {cartCount}
                 </span>
               </Link>
             </div>

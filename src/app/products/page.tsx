@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Search, ShoppingBag, Eye, X } from "lucide-react";
 import { Product, INITIAL_PRODUCTS } from "@/data/mockData";
+import { addToCart, getCartTotalCount } from "@/data/cartStore";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
@@ -12,6 +13,26 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("newest");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [cartCount, setCartCount] = useState(0);
+
+  // Sync cart count
+  useEffect(() => {
+    const updateCount = () => {
+      setCartCount(getCartTotalCount());
+    };
+    updateCount();
+    window.addEventListener("cartUpdated", updateCount);
+    return () => window.removeEventListener("cartUpdated", updateCount);
+  }, []);
+
+  const handleAddToCart = (product: Product, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const result = addToCart(product);
+    alert(result.message);
+  };
 
   const categories = [
     { id: "all", label: "ทั้งหมด" },
@@ -47,8 +68,9 @@ export default function ProductsPage() {
       .filter((p) => {
         const matchesCategory =
           activeCategory === "all" || p.category === activeCategory;
+        const pTitle = p.title || (p as any).name || "";
         const matchesQuery =
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          pTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.tags?.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
         return matchesCategory && matchesQuery;
@@ -83,7 +105,7 @@ export default function ProductsPage() {
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fdf8e6] text-[#8a5b14] text-xs font-bold hover:bg-[#f6e9b8] transition border border-[#f3d07a]/60 shadow-xs"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>ดูตะกร้าสินค้า (3)</span>
+            <span>ดูตะกร้าสินค้า ({cartCount})</span>
           </Link>
         </div>
       </div>
@@ -222,7 +244,7 @@ export default function ProductsPage() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => alert(`เพิ่ม "${product.title}" ลงในตะกร้าเรียบร้อยแล้ว!`)}
+                      onClick={(e) => handleAddToCart(product, e)}
                       className="p-2 rounded-xl bg-neutral-100 hover:bg-neutral-900 hover:text-white text-neutral-800 transition cursor-pointer"
                       title="ใส่ตะกร้า"
                     >
@@ -276,8 +298,9 @@ export default function ProductsPage() {
                 </div>
                 <div className="space-y-2 pt-2">
                   <button
-                    onClick={() => {
-                      alert(`เพิ่ม "${selectedProduct.title}" ลงในตะกร้าเรียบร้อยแล้ว!`);
+                    type="button"
+                    onClick={(e) => {
+                      handleAddToCart(selectedProduct, e);
                       setSelectedProduct(null);
                     }}
                     className="w-full py-3 rounded-full bg-neutral-900 hover:bg-black text-white text-xs sm:text-sm font-bold transition shadow-md cursor-pointer"

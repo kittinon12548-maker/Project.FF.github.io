@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ShoppingBag,
@@ -19,15 +19,7 @@ import {
   AlertCircle,
   Download,
 } from "lucide-react";
-
-interface CartItem {
-  id: string;
-  name: string;
-  variation: string;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-}
+import { CartItem, getCartItems, saveCartItems, INITIAL_CART_ITEMS } from "@/data/cartStore";
 
 interface BankInfo {
   id: string;
@@ -83,41 +75,28 @@ const SUPPORTED_BANKS: BankInfo[] = [
   },
 ];
 
-const INITIAL_CART_ITEMS: CartItem[] = [
-  {
-    id: "cart-1",
-    name: "สารกระตุ้นเรซิ่นไม้กฤษณา กานหอม พรีเมียม",
-    variation: "ขนาด 3 ลิตร (3L)",
-    price: 950,
-    quantity: 1,
-    imageUrl: "https://images.unsplash.com/photo-1608500218890-c4f86641bc34?w=400&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "cart-2",
-    name: "น้ำหอมกฤษณาแท้ CHUN Eau De Parfum Force Vive",
-    variation: "ขวดแก้วหรูหรา 50 ml",
-    price: 1890,
-    quantity: 1,
-    imageUrl: "https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?w=400&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "cart-3",
-    name: "ชุดถุงให้สารกระตุ้นต้นไม้พร้อมสาย",
-    variation: "ความจุ 1,000 ml",
-    price: 320,
-    quantity: 2,
-    imageUrl: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=400&auto=format&fit=crop&q=80",
-  },
-];
-
 type PaymentMethod = "" | "qr_code" | "bank_transfer";
 
 export default function CartPage() {
-  const [items, setItems] = useState<CartItem[]>(INITIAL_CART_ITEMS);
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [discountPercent, setDiscountPercent] = useState(0);
   const [couponError, setCouponError] = useState("");
   const [couponSuccess, setCouponSuccess] = useState("");
+
+  // Sync with localStorage
+  useEffect(() => {
+    setItems(getCartItems());
+    setIsLoaded(true);
+
+    const handleCartUpdated = () => {
+      setItems(getCartItems());
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdated);
+    return () => window.removeEventListener("cartUpdated", handleCartUpdated);
+  }, []);
 
   // Payment states
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("");
@@ -131,22 +110,24 @@ export default function CartPage() {
 
   // Update item quantity
   const handleQuantityChange = (id: string, delta: number) => {
-    setItems((prev) =>
-      prev
-        .map((item) => {
-          if (item.id === id) {
-            const newQty = item.quantity + delta;
-            return newQty > 0 ? { ...item, quantity: newQty } : null;
-          }
-          return item;
-        })
-        .filter(Boolean) as CartItem[]
-    );
+    const updated = items
+      .map((item) => {
+        if (item.id === id) {
+          const newQty = item.quantity + delta;
+          return newQty > 0 ? { ...item, quantity: newQty } : null;
+        }
+        return item;
+      })
+      .filter(Boolean) as CartItem[];
+    setItems(updated);
+    saveCartItems(updated);
   };
 
   // Remove item
   const handleRemoveItem = (id: string) => {
-    setItems((prev) => prev.filter((i) => i.id !== id));
+    const updated = items.filter((i) => i.id !== id);
+    setItems(updated);
+    saveCartItems(updated);
   };
 
   // Apply voucher
@@ -214,6 +195,7 @@ export default function CartPage() {
         date: new Date().toLocaleString("th-TH"),
       });
       setItems([]);
+      saveCartItems([]);
     }, 700);
   };
 
@@ -243,7 +225,12 @@ export default function CartPage() {
           </Link>
         </div>
 
-        {items.length === 0 && !completedOrder ? (
+        {!isLoaded ? (
+          <div className="py-24 text-center">
+            <div className="w-8 h-8 border-2 border-neutral-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <p className="text-xs text-neutral-500 font-medium mt-3">กำลังโหลดตะกร้าสินค้า...</p>
+          </div>
+        ) : items.length === 0 && !completedOrder ? (
           /* Empty Cart State */
           <div className="bg-white rounded-3xl border border-neutral-200 p-12 sm:p-16 text-center max-w-xl mx-auto shadow-xs space-y-5 my-8">
             <div className="w-20 h-20 rounded-full bg-[#fdf8e6] text-[#8a5b14] flex items-center justify-center mx-auto shadow-inner">
