@@ -96,7 +96,7 @@ export default function ProductsPage() {
             </Link>
             <span className="text-neutral-300">/</span>
             <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider">
-              สินค้าทั้งหมด (Products)
+              ผลิตภัณฑ์ (Products)
             </span>
           </div>
 

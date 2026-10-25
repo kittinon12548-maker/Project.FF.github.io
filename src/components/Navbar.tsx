@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Search, User, Globe, ShoppingBag, X, ShieldAlert, LogOut, LayoutDashboard } from "lucide-react";
+import { Search, User, Globe, ShoppingBag, X, ShieldAlert, LogOut, LayoutDashboard, ChevronRight } from "lucide-react";
 import { getCartTotalCount } from "@/data/cartStore";
 
 export default function Navbar() {
@@ -14,6 +14,71 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState<"TH" | "EN">("TH");
+
+  // Mega Menu Hover State with Smooth Hover Intent Delay
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const enterTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (menu: string) => {
+    // Clear pending leave timeout so it doesn't close
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = null;
+    }
+    // If another dropdown is already open, switch immediately for seamless browsing
+    if (activeDropdown !== null) {
+      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+      setActiveDropdown(menu);
+      return;
+    }
+
+    // Hover Intent Delay: smooth 160ms delay when first hovering
+    if (enterTimeoutRef.current) {
+      clearTimeout(enterTimeoutRef.current);
+    }
+    enterTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(menu);
+    }, 160);
+  };
+
+  const handleMouseLeave = () => {
+    // Cancel pending open if mouse moved away before delay elapsed
+    if (enterTimeoutRef.current) {
+      clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = null;
+    }
+    // Smooth leave debounce delay
+    leaveTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 220);
+  };
+
+  // Keep dropdown open without flicker when cursor is inside panel
+  const handleDropdownMouseEnter = () => {
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = null;
+    }
+    if (enterTimeoutRef.current) {
+      clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = null;
+    }
+  };
+
+  // Close dropdown on route change
+  useEffect(() => {
+    if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+    if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+    setActiveDropdown(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (enterTimeoutRef.current) clearTimeout(enterTimeoutRef.current);
+      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+    };
+  }, []);
 
   // Auth States
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -76,7 +141,7 @@ export default function Navbar() {
       setIsAuthOpen(false);
       setLoginEmail("");
       setLoginPassword("");
-      alert(`ยินดีต้อนรับคุณ ${loginEmail.trim()} เข้าสู่ระบบสมาชิก GANHOM`);
+      alert(`ยินดีต้อนรับคุณ ${loginEmail.trim()} เข้าสู่ระบบสมาชิก`);
     } else {
       setAuthError("กรุณากรอกอีเมลและรหัสผ่าน");
     }
@@ -90,21 +155,22 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: "หน้าแรก", href: "/" },
-    { label: "สินค้าทั้งหมด", href: "/products" },
+    { label: "เลือกซื้อ", href: "/products" },
     { label: "เกี่ยวกับเรา", href: "/about" },
-    { label: "วิธีการสั่งซื้อและการชำระเงิน", href: "/how-to-order" },
     { label: "บริการช่วยเหลือ", href: "/contact" },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-transform duration-300 ease-in-out">
-        {/* Luxury Gold Strip */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-[#b38728] via-[#f3d07a] to-[#996515]"></div>
-
+      <header
+        className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
+          activeDropdown
+            ? "bg-white border-b-transparent"
+            : "bg-white/95 backdrop-blur-md border-b border-neutral-200/60"
+        }`}
+      >
         {/* Main Header Row */}
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3.5 md:py-4">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 md:py-3.5">
           <div className="flex items-center justify-between gap-4 lg:gap-8">
             {/* Brand Title (Left Corner) */}
             <div className="flex items-center gap-3 shrink-0">
@@ -112,8 +178,8 @@ export default function Navbar() {
                 href="/"
                 className="group inline-flex items-center transition-opacity hover:opacity-85"
               >
-                <span className="text-2xl sm:text-3xl font-extrabold tracking-[0.25em] font-sans uppercase pl-[0.1em] bg-gradient-to-r from-[#8a5b14] via-[#c29015] to-[#71440a] bg-clip-text text-transparent">
-                  GANHOM
+                <span className="text-2xl sm:text-3xl font-extrabold tracking-[0.12em] font-sans uppercase pl-[0.05em] bg-gradient-to-r from-[#8a5b14] via-[#c29015] to-[#71440a] bg-clip-text text-transparent">
+                  GANHOM 
                 </span>
               </Link>
               {currentUser?.isAdmin && (
@@ -128,24 +194,47 @@ export default function Navbar() {
             </div>
 
             {/* Navigation Menu (Top Bar) */}
-            <nav className="hidden md:flex items-center justify-center gap-4 lg:gap-6 xl:gap-7 flex-1">
+            <nav className="hidden md:flex items-center justify-center gap-6 lg:gap-8 xl:gap-9 flex-1">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
+                const isProducts = link.href === "/products";
+                const isSupport = link.href === "/contact";
+                const isDropdownActive =
+                  (isProducts && activeDropdown === "products") ||
+                  (isSupport && activeDropdown === "support");
+                const isDimmed = activeDropdown !== null && !isDropdownActive;
+
                 return (
-                  <Link
+                  <div
                     key={link.href}
-                    href={link.href}
-                    className={`group relative whitespace-nowrap py-1 text-xs lg:text-[13px] tracking-wide transition-colors duration-200 ${
-                      isActive ? "text-black font-semibold" : "text-neutral-600 hover:text-black font-medium"
-                    }`}
+                    className="relative py-2"
+                    onMouseEnter={() => {
+                      if (isProducts) handleMouseEnter("products");
+                      else if (isSupport) handleMouseEnter("support");
+                      else handleMouseLeave();
+                    }}
+                    onMouseLeave={handleMouseLeave}
                   >
-                    <span>{link.label}</span>
-                    <span
-                      className={`absolute bottom-0 left-0 h-[2px] w-full bg-black transition-transform duration-200 origin-center ${
-                        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    <Link
+                      href={link.href}
+                      className={`group relative whitespace-nowrap py-1 text-xs lg:text-[13px] tracking-tight transition-all duration-200 ease-out ${
+                        isDimmed
+                          ? "opacity-35 text-[#1d1d1f]"
+                          : isActive || isDropdownActive
+                          ? "opacity-100 text-[#1d1d1f] font-semibold"
+                          : "opacity-80 text-[#1d1d1f] hover:opacity-100 font-medium"
                       }`}
-                    ></span>
-                  </Link>
+                    >
+                      <span>{link.label}</span>
+                      <span
+                        className={`absolute bottom-0 left-0 h-[2px] w-full bg-[#1d1d1f] transition-all duration-300 origin-center ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                          isActive || isDropdownActive
+                            ? "scale-x-100 opacity-100"
+                            : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
+                        }`}
+                      ></span>
+                    </Link>
+                  </div>
                 );
               })}
             </nav>
@@ -299,6 +388,175 @@ export default function Navbar() {
           </div>
         )}
 
+        {/* Apple-style Store Mega Menu Flyout */}
+        <div
+          onMouseEnter={handleDropdownMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`hidden md:block absolute left-0 right-0 top-full w-full bg-white border-b border-black/[0.04] shadow-[0_12px_24px_-10px_rgba(0,0,0,0.04)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 ${
+            activeDropdown === "products"
+              ? "opacity-100 translate-y-0 pointer-events-auto visible"
+              : "opacity-0 -translate-y-1.5 pointer-events-none invisible duration-200 ease-out"
+          }`}
+        >
+          <div className="mx-auto max-w-[980px] px-8 sm:px-10 lg:px-12 pt-7 sm:pt-8 pb-8 sm:pb-9">
+            <div className="grid grid-cols-12 gap-8 lg:gap-12">
+              {/* Column 1: Main Category Items (Large Semibold Typography) */}
+              <div className="col-span-6 lg:col-span-5">
+                <p className="text-[12px] text-[#6e6e73] font-normal tracking-[-0.01em] mb-3 select-none">
+                  เลือกซื้อ
+                </p>
+                <div className="space-y-1.5 sm:space-y-2 group/col1">
+                  {[
+                    { label: "แก่นไม้กฤษณา", href: "/products?search=แก่นไม้" },
+                    { label: "น้ำมันกฤษณา & น้ำหอม", href: "/products?search=น้ำมันกฤษณา" },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActiveDropdown(null)}
+                      className="block text-[23px] sm:text-[24px] lg:text-[25px] font-semibold text-[#1d1d1f] tracking-[-0.015em] leading-[1.25] transition-all duration-200 ease-out hover:!opacity-100 group-hover/col1:opacity-40"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 2: Experience & Farm */}
+              <div className="col-span-3 lg:col-span-4">
+                <p className="text-[12px] text-[#6e6e73] font-normal tracking-[-0.01em] mb-3 select-none">
+                  ประสบการณ์และฟาร์ม
+                </p>
+                <div className="space-y-2.5">
+                  {[
+                    { label: "เรียนรู้สร้างแก่นไม้กฤษณา", href: "/products?search=เร่งแก่น" },
+                    { label: "ข่าวสาร", href: "/about" },
+                    { label: "เยี่ยมชมฟาร์ม", href: "/contact" },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActiveDropdown(null)}
+                      className="block text-[12px] font-semibold text-[#1d1d1f] tracking-[-0.01em] leading-normal transition-colors duration-200 hover:text-[#0071e3]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3: Account & Orders */}
+              <div className="col-span-3 lg:col-span-3">
+                <p className="text-[12px] text-[#6e6e73] font-normal tracking-[-0.01em] mb-3 select-none">
+                  บัญชีและคำสั่งซื้อ
+                </p>
+                <div className="space-y-2.5">
+                  {[
+                    { label: "สถานะคำสั่งซื้อ", href: "/cart" },
+                    { label: "วิธีการชำระเงิน", href: "/how-to-order" },
+                    { label: "จัดการข้อมูลส่วนตัว", href: "/account" },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActiveDropdown(null)}
+                      className="block text-[12px] font-semibold text-[#1d1d1f] tracking-[-0.01em] leading-normal transition-colors duration-200 hover:text-[#0071e3]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Apple-style Support Mega Menu Flyout */}
+        <div
+          onMouseEnter={handleDropdownMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`hidden md:block absolute left-0 right-0 top-full w-full bg-white border-b border-black/[0.04] shadow-[0_12px_24px_-10px_rgba(0,0,0,0.04)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] z-50 ${
+            activeDropdown === "support"
+              ? "opacity-100 translate-y-0 pointer-events-auto visible"
+              : "opacity-0 -translate-y-1.5 pointer-events-none invisible duration-200 ease-out"
+          }`}
+        >
+          <div className="mx-auto max-w-[980px] px-8 sm:px-10 lg:px-12 pt-7 sm:pt-8 pb-8 sm:pb-9">
+            <div className="grid grid-cols-12 gap-8 lg:gap-12">
+              {/* Column 1: Main Support Links (Large Semibold Typography) */}
+              <div className="col-span-6 lg:col-span-5">
+                <p className="text-[12px] text-[#6e6e73] font-normal tracking-[-0.01em] mb-3 select-none">
+                  บริการช่วยเหลือ
+                </p>
+                <div className="space-y-1.5 sm:space-y-2 group/colSupport">
+                  {[
+                    { label: "วิธีการสั่งซื้อและการชำระเงิน", href: "/how-to-order" },
+                    { label: "ติดต่อฝ่ายบริการลูกค้า", href: "/contact" },
+                    { label: "คำถามที่พบบ่อย (FAQ)", href: "/how-to-order" },
+                    { label: "การจัดส่งและติดตามพัสดุ", href: "/cart" },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActiveDropdown(null)}
+                      className="block text-[23px] sm:text-[24px] lg:text-[25px] font-semibold text-[#1d1d1f] tracking-[-0.015em] leading-[1.25] transition-all duration-200 ease-out hover:!opacity-100 group-hover/colSupport:opacity-40"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 2: Quick Links */}
+              <div className="col-span-3 lg:col-span-4">
+                <p className="text-[12px] text-[#6e6e73] font-normal tracking-[-0.01em] mb-3 select-none">
+                  หัวข้อยอดนิยม
+                </p>
+                <div className="space-y-2.5">
+                  {[
+                    { label: "วิธีการชำระเงินและแจ้งโอน", href: "/how-to-order" },
+                    { label: "เช็คสถานะคำสั่งซื้อ", href: "/cart" },
+                    { label: "นโยบายการรับประกันสินค้า", href: "/about" },
+                    { label: "ปรึกษาผู้เชี่ยวชาญเรื่องกลิ่น", href: "/contact" },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActiveDropdown(null)}
+                      className="block text-[12px] font-semibold text-[#1d1d1f] tracking-[-0.01em] leading-normal transition-colors duration-200 hover:text-[#0071e3]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3: Contact Channels */}
+              <div className="col-span-3 lg:col-span-3">
+                <p className="text-[12px] text-[#6e6e73] font-normal tracking-[-0.01em] mb-3 select-none">
+                  ติดต่อสอบถาม
+                </p>
+                <div className="space-y-2.5">
+                  {[
+                    { label: "ส่งข้อความติดต่อเรา", href: "/contact" },
+                    { label: "ข้อมูลแบรนด์ GANHOM", href: "/about" },
+                    { label: "แผนที่และเวลาทำการ", href: "/contact" },
+                  ].map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setActiveDropdown(null)}
+                      className="block text-[12px] font-semibold text-[#1d1d1f] tracking-[-0.01em] leading-normal transition-colors duration-200 hover:text-[#0071e3]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Mobile Navigation Menu */}
         <nav className="md:hidden border-t border-neutral-100 bg-white">
           <div className="no-scrollbar flex items-center justify-start gap-4 overflow-x-auto px-4 py-2.5">
@@ -308,14 +566,14 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`group relative whitespace-nowrap py-1 text-xs tracking-wide transition-colors duration-200 ${
-                    isActive ? "text-black font-semibold" : "text-neutral-600 hover:text-black font-medium"
+                  className={`group relative whitespace-nowrap py-1 text-xs tracking-tight transition-all duration-200 ${
+                    isActive ? "text-[#1d1d1f] font-semibold" : "text-[#1d1d1f]/70 hover:text-[#1d1d1f] font-medium"
                   }`}
                 >
                   <span>{link.label}</span>
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] w-full bg-black transition-transform duration-200 origin-center ${
-                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    className={`absolute bottom-0 left-0 h-[2px] w-full bg-[#1d1d1f] transition-all duration-300 origin-center ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100"
                     }`}
                   ></span>
                 </Link>
@@ -324,6 +582,15 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
+
+      {/* Apple-style Backdrop Blur Overlay: ใส สว่าง สบายตา ไม่มืดหมอง */}
+      {activeDropdown && (
+        <div
+          className="hidden md:block fixed inset-0 top-[52px] md:top-[56px] bg-white/20 backdrop-blur-md z-40 transition-opacity duration-300 ease-out"
+          onClick={() => setActiveDropdown(null)}
+          onMouseEnter={handleMouseLeave}
+        />
+      )}
 
       {/* Auth Modal with Admin Recognition */}
       {isAuthOpen && (

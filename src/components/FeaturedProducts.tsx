@@ -147,7 +147,7 @@ export default function FeaturedProducts() {
   const currentTab = tabs[activeTab];
 
   return (
-    <section className="w-full py-6 sm:py-10">
+    <section className="w-full pt-4 sm:pt-6 pb-0">
       <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-neutral-900 tracking-tight font-sans">
         ผลิตภัณฑ์ที่ร่วมรายการ
       </h2>
@@ -176,8 +176,8 @@ export default function FeaturedProducts() {
         </button>
       </div>
 
-      {/* Main Tab Content Card */}
-      <div className="mt-7 sm:mt-8 rounded-3xl bg-white border border-neutral-200 shadow-sm p-4 sm:p-7 md:p-8 transition-all">
+      {/* Main Tab Content */}
+      <div className="mt-7 sm:mt-8 space-y-5 sm:space-y-6">
         {/* Featured Showcase */}
         <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl overflow-hidden bg-neutral-50/70 border border-neutral-200 transition-all hover:border-[#c29015]/50">
           <div className="relative w-full h-[240px] sm:h-[300px] md:h-[340px] overflow-hidden bg-neutral-100 flex items-center justify-center">

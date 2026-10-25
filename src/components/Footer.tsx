@@ -19,13 +19,12 @@ export default function Footer() {
               📝
             </div>
             <div>
-              <p className="font-bold text-neutral-900">My Blog</p>
-              <p className="text-xs text-neutral-500">Personal Blog Website &amp; GANHOM Luxury Store</p>
+              <p className="text-xs text-neutral-500">Personal Blog Website &amp; GANHOM </p>
             </div>
           </div>
           <div className="text-center text-sm text-neutral-500 sm:text-right">
             <p>© 2026 My Blog. All rights reserved.</p>
-            <p className="mt-1 font-semibold text-neutral-700">0214321 Web App Design &amp; Development</p>
+          
           </div>
         </div>
         <div className="mt-6 border-t border-neutral-100 pt-5 text-center text-xs text-neutral-400">

@@ -1,16 +1,16 @@
 import React from "react";
 import HeroSlider from "@/components/HeroSlider";
 import FeaturedProducts from "@/components/FeaturedProducts";
-import AboutBanner from "@/components/AboutBanner";
+import ServiceHighlights from "@/components/ServiceHighlights";
 
 export default function HomePage() {
   return (
     <div className="w-full">
       <HeroSlider />
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-16 space-y-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-6 sm:pt-8 pb-10 sm:pb-14">
         <FeaturedProducts />
-        <AboutBanner />
       </div>
+      <ServiceHighlights />
     </div>
   );
 }
